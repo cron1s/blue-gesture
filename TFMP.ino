@@ -9,7 +9,6 @@ void setup()
 
   lockvolume();
   setvolume();
-  int setvolume();
 
   delay(20);                                             // Give port time to initalize
   printf_begin();                                        // Initialize printf.
@@ -92,7 +91,7 @@ void loop()
   {
     if (tfDist <= 20) // Measure and set volume ref. to distance //Volume 10%
     {
-      void setvolume(10); // Set Volume ref. to distance
+      // void setvolume(10); // Set Volume ref. to distance
       void lockvolume();
       printf("Volume set 10"); // Print out distance to monitor for testing
       printf("\r\n");
@@ -211,7 +210,7 @@ void lockvolume()
   // getData.current(tfDist)
 }
 
-int setvolume(void setvolume(10))
+void setvolume()
 {
   //.setvoltage = 0.01 // Volume changes voltage of input to amplifier
 }
