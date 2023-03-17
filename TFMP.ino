@@ -83,11 +83,14 @@ int16_t tfFlux = 0; // Strength or quality of return signal
 int16_t tfTemp = 0; // Internal temperature of Lidar sensor chip
 
 // Use the 'getData' function to pass back device data.
+
+////////////////////////////
+
 void loop()
 {
   delay(50); // Loop delay to match the 20Hz data frame rate
 
-  if (tfmP.getData(tfDist, tfFlux, tfTemp)) // Get data from the device.
+  if (tfmP.getData(tfDist)) // Get data from the device.
   {
     if (tfDist <= 20) // Measure and set volume ref. to distance //Volume 10%
     {
