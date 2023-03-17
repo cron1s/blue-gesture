@@ -5,7 +5,12 @@ TFMPlus tfmP;        // Create a TFMini Plus object
 
 void setup()
 {
-  Serial.begin(115200);                                  // Intialize terminal serial port
+  Serial.begin(115200); // Intialize terminal serial port
+
+  lockvolume();
+  setvolume();
+  int setvolume();
+
   delay(20);                                             // Give port time to initalize
   printf_begin();                                        // Initialize printf.
   printf("\r\nTFMPlus Library Example - 10SEP2021\r\n"); // say 'hello'
@@ -85,106 +90,107 @@ void loop()
 
   if (tfmP.getData(tfDist, tfFlux, tfTemp)) // Get data from the device.
   {
-    if (tfDist <= 20) // Measure and set volume ref. to distance
+    if (tfDist <= 20) // Measure and set volume ref. to distance //Volume 10%
     {
-      // setvolume = 10;       // Set Volume ref. to distance --> Working on
+      void setvolume(10); // Set Volume ref. to distance
+      void lockvolume();
       printf("Volume set 10"); // Print out distance to monitor for testing
       printf("\r\n");
     }
-    else if (tfDist <= 23)
+    else if (tfDist <= 23) // Volume 16%
     {
-      // setvolume = 16;
+      // void setvolume(16);
       printf("Volume set 16");
       printf("\r\n");
     }
-    else if (tfDist <= 26)
+    else if (tfDist <= 26) // Volume 22%
     {
-      // setvolume = 22;
+      // void setvolume(22);
       printf("Volume set 22");
       printf("\r\n");
     }
-    else if (tfDist <= 29)
+    else if (tfDist <= 29) // Volume 28%
     {
-      // setvolume = 28;
+      // void setvolume(28);
       printf("Volume set 28");
       printf("\r\n");
     }
-    else if (tfDist <= 32)
+    else if (tfDist <= 32) // Volume 34%
     {
-      // setvolume = 34;
+      // void setvolume(34);
       printf("Volume set 34");
       printf("\r\n");
     }
-    else if (tfDist <= 35)
+    else if (tfDist <= 35) // Volume 40%
     {
-      // setvolume = 40;
+      // void setvolume(40);
       printf("Volume set 40");
       printf("\r\n");
     }
-    else if (tfDist <= 38)
+    else if (tfDist <= 38) // Volume 46%
     {
-      // setvolume = 46;
+      // void setvolume(46);
       printf("Volume set 46");
       printf("\r\n");
     }
-    else if (tfDist <= 41)
+    else if (tfDist <= 41) // Volume 52%
     {
-      // setvolume = 52;
+      // void setvolume(52);
       printf("Volume set 52");
       printf("\r\n");
     }
-    else if (tfDist <= 44)
+    else if (tfDist <= 44) // Volume 58%
     {
-      // setvolume = 58;
+      // void setvolume(58);
       printf("Volume set 58");
       printf("\r\n");
     }
-    else if (tfDist <= 47)
+    else if (tfDist <= 47) // Volume 64%
     {
-      // setvolume = 64;
+      // void setvolume(64);
       printf("Volume set 64");
       printf("\r\n");
     }
-    else if (tfDist <= 50)
+    else if (tfDist <= 50) // Volume 70%
     {
-      // setvolume = 70;
+      // void setvolume(70);
       printf("Volume set 70");
       printf("\r\n");
     }
-    else if (tfDist <= 50)
+    else if (tfDist <= 53) // Volume 76%
     {
-      // setvolume = 70;
-      printf("Volume set 70");
+      // void setvolume(76);
+      printf("Volume set 76");
       printf("\r\n");
     }
-    else if (tfDist <= 53)
+    else if (tfDist <= 56) // Volume 82%
     {
-      // setvolume = 70;
-      printf("Volume set 70");
-      printf("\r\n");
-    }
-    else if (tfDist <= 56)
-    {
-      // setvolume = 82;
+      // void setvolume(82);
       printf("Volume set 82");
       printf("\r\n");
     }
-    else if (tfDist <= 59)
+    else if (tfDist <= 59) // Volume 88%
     {
-      // setvolume = 88;
+      // void setvolume(88);
       printf("Volume set 88");
       printf("\r\n");
     }
-    else if (tfDist <= 62)
+    else if (tfDist <= 62) // Volume 94%
     {
-      // setvolume = 94;
+      // void setvolume(94);
       printf("Volume set 94");
       printf("\r\n");
     }
-    else if (tfDist <= 67)
+    else if (tfDist <= 67) // Volume 100%
     {
-      // setvolume = 100;
+      // void setvolume(100);
       printf("Volume set 100");
+      printf("\r\n");
+    }
+    else if (tfDist >= 68)
+    {
+      // void setvolume(25);
+      printf("Distance-to-Volume not possible at this hight");
       printf("\r\n");
     }
     /*
@@ -198,4 +204,14 @@ void loop()
   {
     tfmP.printFrame(); // display the error and HEX dataa
   }
+}
+
+void lockvolume()
+{
+  // getData.current(tfDist)
+}
+
+int setvolume(void setvolume(10))
+{
+  //.setvoltage = 0.01 // Volume changes voltage of input to amplifier
 }
