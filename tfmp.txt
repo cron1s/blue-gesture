@@ -1,0 +1,9 @@
+Schreibe mir einen C++ Code der für einen Lidar Sensor (TFMPlus) und Arduino Mega funktioniert. 
+Es wird #include <TFMPlus.h> verwendet und TFMPlus tfmP als Objekt. 
+Der Lidar Sensor misst den Abstände zur Hand der das Volumen steuert und leitet einen Wert für das Volumen des Bluetooth-Speakers an 2 Arduino ports weiter. 
+Ein Port ist für Lautstärke leiser und einer für Lautstärke Lauter. 
+Es muss 3-5 Sekunden der gleiche Wert jedoch mit einem spielraum von +1,5cm und -1,5cm, gemessen werden, um diesen weiterzuleiten. 
+Alle kürzeren Messungen sind ungültig. 
+Sollte der Lidar Sensor jedoch eine Entfernung von mehr als 67 cm messen, werden keine Daten an den Lidar Sensor weitergeleitet. 
+Die Messung wird genutzt, um die Volumen-Konfiguration an einem Bluetooth-Modul zu verändern. 
+Es muss alle 3cm + 6% Volumen verändert werden, maximal sind 67cm, minimal 20cm.
