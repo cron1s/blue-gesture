@@ -1,7 +1,7 @@
 #include <TFMPlus.h>
 
-const int louderPort = 7;   // Digital pin for louder
-const int quieterPort = 8;  // Digital pin for quieter
+const int louderPort = 6;   // Digital pin for louder  //// Digital pin 2 (PWM) https://www.exp-tech.de/blog/arduino-mega-2560-pinbelegung
+const int quieterPort = 7;  // Digital pin for quieter //// Digital pin 3 (PWM) https://www.exp-tech.de/blog/arduino-mega-2560-pinbelegung
 const int maxDistance = 67; // Maximum valid distance
 const int minDistance = 15; // Minimum valid distance
 
@@ -19,7 +19,7 @@ void setup()
 
 void loop()
 {
-    int distance = tfmP.getDistance(); // Get distance in cm
+    int distance = tfmP.getData(tfDist); // Get distance in cm
 
     if (distance > maxDistance || distance < minDistance)
     {
