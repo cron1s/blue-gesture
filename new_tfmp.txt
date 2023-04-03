@@ -1,9 +1,24 @@
-Schreibe mir einen C++ Code der für einen Lidar Sensor (TFMPlus) und Arduino Mega funktioniert. 
+Schreibe mir einen C++ Code der für einen Lidar Sensor (TFMPlus), Arduino Mega und Bluetooth Modul MH-MX8 (m18) funktioniert. 
 Es wird #include <TFMPlus.h> verwendet und TFMPlus tfmP als Objekt. 
-Der Lidar Sensor misst den Abstände zur Hand der das Volumen an einem Bluetooth-Modul steuert.
+Der Lidar Sensor misst den Abstände zur Hand der das Volumen an einem Bluetooth-Modul steuert. 
 Es werden 2 Ports verwendet; einer für leiser einer für lauter.
 Das Volumen ist relativ zum Abstand zwischen 15 und 67 centimeter; umso höher der Abstand umso lauter soll der Bluetooth-Speaker sein.
 Sollte der Lidar sensor eine höhe größer als 67 cm messen, ist der wert ungültig und es soll der letzte gültige Wert als Volumen verwendet werden.
 Die Outputs am Arduino müssen beide invertiert werden bzw. an Masse gezogen werden.
 Das Volumen soll immer live aufgenommen werden, um Werte an das Bluetooth-Modul live zu senden.
 
+----
+
+Um das MH-MX8 Bluetooth-Modul mit dem Arduino zu verwenden, müssen Sie es über die serielle Schnittstelle des Arduino anschließen. 
+Sie können die SoftwareSerial-Bibliothek verwenden, um eine zweite serielle Verbindung zum MH-MX8-Modul herzustellen.
+
+Hier ist der aktualisierte Code, der das MH-MX8 Bluetooth-Modul verwendet:
+
+<code in new_tfmp.ino>
+
+Hier haben wir die SoftwareSerial-Bibliothek verwendet, um eine serielle Verbindung zum MH-MX8 Bluetooth-Modul herzustellen. 
+Wir haben die Pins 10 und 11 des Arduino für die Verbindung mit dem Modul verwendet.
+In der loop()-Funktion wird das Volumen jetzt über bluetooth.write(volumen) an das Bluetooth-Modul gesendet.
+
+Stellen Sie sicher, dass die Baudrate des MH-MX8-Moduls auf 9600 eingestellt ist, 
+damit es mit der bluetooth.begin(9600)-Anweisung richtig konfiguriert wird.
