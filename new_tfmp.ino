@@ -107,14 +107,16 @@ void loop()
     if (volume != lastVolume) // Volume has changed
     {
         if (volume > lastVolume)
-        {                                    // Volume is getting louder
-            digitalWrite(louderPort, LOW);   // Invert and pull to ground
-            digitalWrite(quieterPort, HIGH); // No inversion and not pulled to ground
+        {                                  // Volume is getting louder
+            digitalWrite(louderPort, LOW); // Invert and pull to ground
+            delay(1000);
+            digitalWrite(louderPort, HIGH); // No inversion and not pulled to ground
         }
         else
         {                                   // Volume is getting quieter
-            digitalWrite(louderPort, HIGH); // No inversion and not pulled to ground
-            digitalWrite(quieterPort, LOW); // Invert and pull to ground
+            digitalWrite(quieterPort, LOW); // No inversion and not pulled to ground
+            delay(1000);
+            digitalWrite(quieterPort, HIGH); // Invert and pull to ground
         }
         lastVolume = volume; // Store the current volume
     }
