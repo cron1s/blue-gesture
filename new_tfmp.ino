@@ -89,7 +89,7 @@ int16_t tfDist = 0;
 
 void loop()
 {
-    float distance = tfmP.getData(tfDist); // Get distance in cm
+    int distance = tfmP.getData(tfDist); // Get distance in cm
 
     if (distance > maxDistance || distance < minDistance)
     {
@@ -118,10 +118,10 @@ void loop()
         lastVolume = volume; // Store the current volume
     }
 
-    printf("Distance: ");
-    printf(distance);
+        printf("Distance: %d cm : %d\n", distance, volume);
+    /*printf("%d", distance);
     printf(" cm, Volume: ");
-    printf(volume);
+    printf("%d", volume);*/
 
     delay(5); // Pause between measurements
 }
