@@ -118,7 +118,7 @@ void loop()
         lastVolume = volume; // Store the current volume
     }
 
-    printf("Distance: %d cm : %d\n", distance, volume "%d\n");
+    printf("Distance: %d cm : %d\n", distance, volume, tfDist);
 
     /*printf("%d", distance);
     printf(" cm, Volume: ");
