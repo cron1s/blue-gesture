@@ -17,9 +17,9 @@ void setup()
     // Initialisiere den Seriellen Monitor
     Serial.begin(115200);
 
-    delay(20);                                             // Give port time to initalize
-    printf_begin();                                        // Initialize printf.
-    printf("\r\nTFMPlus Library Example - 10SEP2021\r\n"); // say 'hello'
+    delay(20);                                                   // Give port time to initalize
+    Serial.print_begin();                                        // Initialize Serial.print.
+    Serial.print("\r\nTFMPlus Library Example - 10SEP2021\r\n"); // say 'hello'
 
     Serial2.begin(115200); // Initialize TFMPLus device serial port.
     delay(20);             // Give port time to initalize
@@ -28,10 +28,10 @@ void setup()
 
     // Send some example commands to the TFMini-Plus
     // - - Perform a system reset - - - - - - - - - - -
-    printf("Soft reset: ");
+    Serial.print("Soft reset: ");
     if (tfmP.sendCommand(SOFT_RESET, 0))
     {
-        printf("passed.\r\n");
+        Serial.print("passed.\r\n");
     }
     else
         tfmP.printReply();
@@ -39,20 +39,20 @@ void setup()
     delay(500); // added to allow the System Rest enough time to complete
 
     // - - Display the firmware version - - - - - - - - -
-    printf("Firmware version: ");
+    Serial.print("Firmware version: ");
     if (tfmP.sendCommand(GET_FIRMWARE_VERSION, 0))
     {
-        printf("%1u.", tfmP.version[0]); // print three single numbers
-        printf("%1u.", tfmP.version[1]); // each separated by a dot
-        printf("%1u\r\n", tfmP.version[2]);
+        Serial.print("%1u.", tfmP.version[0]); // print three single numbers
+        Serial.print("%1u.", tfmP.version[1]); // each separated by a dot
+        Serial.print("%1u\r\n", tfmP.version[2]);
     }
     else
         tfmP.printReply();
     // - - Set the data frame-rate to 20Hz - - - - - - - -
-    printf("Data-Frame rate: ");
+    Serial.print("Data-Frame rate: ");
     if (tfmP.sendCommand(SET_FRAME_RATE, FRAME_20))
     {
-        printf("%2uHz.\r\n", FRAME_20);
+        Serial.print("%2uHz.\r\n", FRAME_20);
     }
     else
         tfmP.printReply();
@@ -66,16 +66,16 @@ void setup()
         // to UART mode.
         // Don't forget to switch the cables, too.
         // - - - - - - - - - - - - - - - - - - - - - - - -
-        printf( "Set I2C Mode: ");
+        Serial.print( "Set I2C Mode: ");
         if( tfmP.sendCommand( SET_I2C_MODE, 0))
         {
-            printf( "mode set.\r\n");
+            Serial.print( "mode set.\r\n");
         }
         else tfmP.printReply();
-        printf( "Save settings: ");
+        Serial.print( "Save settings: ");
         if( tfmP.sendCommand( SAVE_SETTINGS, 0))
         {
-            printf( "saved.\r\n");
+            Serial.print( "saved.\r\n");
         }
         else tfmP.printReply();
         // - - - - - - - - - - - - - - - - - - - - - - - -
@@ -83,6 +83,8 @@ void setup()
 
     delay(500); // And wait for half a second.
 }
+
+int16_t tfDist = 0;
 
 void loop()
 {
