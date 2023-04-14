@@ -118,10 +118,10 @@ void loop()
         lastVolume = volume; // Store the current volume
     }
 
-    Serial.print("Distance: ");
-    Serial.print(distance);
-    Serial.print(" cm, Volume: ");
-    Serial.println(volume);
+    printf("Distance: ");
+    printf(distance);
+    printf(" cm, Volume: ");
+    printf(volume);
 
     delay(5); // Pause between measurements
 }
