@@ -102,6 +102,21 @@ void changevolume(int prozent, bool quiet)
     delay(quiet * 70);
 }
 
+void changevolume(int prozent, bool quiet)
+{
+    if (quiet)
+    {
+        pinMode(quieterPort, OUTPUT);
+        pinMode(louderPort, INPUT);
+    }
+    else
+    {
+        pinMode(louderPort, OUTPUT);
+        pinMode(quieterPort, INPUT);
+    }
+    delay(quiet * 70);
+}
+
 void loop()
 {
     tfmP.getData(tfDist); // Get distance in cm
