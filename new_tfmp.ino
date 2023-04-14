@@ -90,7 +90,7 @@ int16_t tfDist = 0;
 void loop()
 {
     tfmP.getdata(tfDist); // Get distance in cm
-    distance = tfDist;
+    int distance = tfDist;
 
     if (distance > maxDistance || distance < minDistance)
     {
