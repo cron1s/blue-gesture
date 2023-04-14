@@ -87,6 +87,21 @@ void setup()
 
 int16_t tfDist = 0;
 
+void changevolume(int prozent, bool quiet)
+{
+    if (quiet)
+    {
+        pinMode(quieterPort, OUTPUT);
+        pinMode(louderPort, INPUT);
+    }
+    else
+    {
+        pinMode(louderPort, OUTPUT);
+        pinMode(quieterPort, INPUT);
+    }
+    delay(quiet * 70);
+}
+
 void loop()
 {
     tfmP.getData(tfDist); // Get distance in cm
@@ -110,16 +125,12 @@ void loop()
         if (diff < 0)
             diff *= -1;
         if (volume > lastVolume)
-        {                                  // Volume is getting louder
-            digitalWrite(louderPort, LOW); // Invert and pull to ground
-            delay(diff);
-            digitalWrite(louderPort, HIGH); // No inversion and not pulled to ground
+        {
+            changevolume(diff, true);
         }
         else
-        {                                   // Volume is getting quieter
-            digitalWrite(quieterPort, LOW); // No inversion and not pulled to ground
-            delay(diff);
-            digitalWrite(quieterPort, HIGH); // Invert and pull to ground
+        {
+            changevolume(diff, false);
         }
         lastVolume = volume; // Store the current volume
     }
