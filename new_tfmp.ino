@@ -118,11 +118,11 @@ void loop()
         lastVolume = volume; // Store the current volume
     }
 
-    printf("Distance: %d cm : %d\n", distance, volume);
-    printf("Dist:%04i", tfDist)
-        /*printf("%d", distance);
-        printf(" cm, Volume: ");
-        printf("%d", volume);*/
+    printf("Distance: %d cm : %d\n", distance, volume "%d\n");
 
-        delay(5); // Pause between measurements
+    /*printf("%d", distance);
+    printf(" cm, Volume: ");
+    printf("%d", volume);*/
+
+    delay(5); // Pause between measurements
 }
