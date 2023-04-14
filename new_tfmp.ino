@@ -118,8 +118,8 @@ void loop()
         lastVolume = volume; // Store the current volume
     }
 
-    printf("Dist:%04icm ", tfDist);
-    printf("\r\n");
+    printf("Distance: ");
+    printf(volume);
     printf(" cm, Volume: ");
     printf(volume);
 
