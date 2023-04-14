@@ -136,7 +136,7 @@ void loop()
 
     if (volume != lastVolume) // Volume has changed
     {
-        int diff = 1000 * (lastVolume - volume);
+        int diff = lastVolume - volume;
         if (diff < 0)
             diff *= -1;
         if (volume > lastVolume)
