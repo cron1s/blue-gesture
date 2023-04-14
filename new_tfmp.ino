@@ -119,7 +119,7 @@ void loop()
     }
 
     printf("Distance: ");
-    printf(volume);
+    printf(distance);
     printf(" cm, Volume: ");
     printf(volume);
 
