@@ -1,4 +1,5 @@
 #include <TFMPlus.h>
+#include <printf.h>
 
 const int louderPort = 6;   // Digital pin for louder  //// Digital pin 2 (PWM) https://www.exp-tech.de/blog/arduino-mega-2560-pinbelegung
 const int quieterPort = 7;  // Digital pin for quieter //// Digital pin 3 (PWM) https://www.exp-tech.de/blog/arduino-mega-2560-pinbelegung
