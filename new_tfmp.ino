@@ -99,7 +99,10 @@ void changevolume(int prozent, bool quiet)
         pinMode(louderPort, OUTPUT);
         pinMode(quieterPort, INPUT);
     }
-    delay(quiet * 70);
+    delay(350); // Delay relativ
+
+    pinMode(louderPort, INPUT);
+    pinMode(quieterPort, INPUT);
 }
 
 void loop()
@@ -121,7 +124,7 @@ void loop()
 
     if (volume != lastVolume) // Volume has changed
     {
-        int diff = lastVolume - volume;
+        int diff = (lastVolume - volume);
         if (diff < 0)
             diff *= -1;
         if (volume > lastVolume)
