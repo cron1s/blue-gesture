@@ -98,7 +98,7 @@ void loop()
         }
         lastVolume = volume; // Speichere die aktuelle Lautstärke
     }
-    printf("Entfernung: %d cm, Lautstärke: %d\n", distance, volume, tfDist);
+    printf("Entfernung: %d cm, Lautstärke: %d\n", distance, volume);
 
     delay(5); // Pause zwischen den Messungen
 }
