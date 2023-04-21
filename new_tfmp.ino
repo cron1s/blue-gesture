@@ -1,148 +1,119 @@
 #include <TFMPlus.h>
 #include <printf.h>
 
-const int louderPort = 6;   // Digital pin for louder  //// Digital pin 2 (PWM) https://www.exp-tech.de/blog/arduino-mega-2560-pinbelegung
-const int quieterPort = 7;  // Digital pin for quieter //// Digital pin 3 (PWM) https://www.exp-tech.de/blog/arduino-mega-2560-pinbelegung
-const int maxDistance = 67; // Maximum valid distance
-const int minDistance = 15; // Minimum valid distance
+const int louderPort = 6;   // Digitaler Pin für lauter
+const int quieterPort = 7;  // Digitaler Pin für leiser
+const int maxDistance = 67; // Maximale gültige Entfernung
+const int minDistance = 15; // Minimale gültige Entfernung
 
 TFMPlus tfmP;
 
-int lastValidDistance = 0; // The last valid distance
-int lastVolume = 0;        // The last volume
+int lastValidDistance = 0; // Die zuletzt gültige Entfernung
+int lastVolume = 0;        // Die zuletzt eingestellte Lautstärke
 
 void setup()
 {
     pinMode(louderPort, OUTPUT);
     pinMode(quieterPort, OUTPUT);
-    // Initialisiere den Seriellen Monitor
-    Serial.begin(115200);
+    Serial.begin(115200); // Initialisiere den Seriellen Monitor
 
-    delay(20);                                             // Give port time to initalize
-    printf_begin();                                        // Initialize printf.
-    printf("\r\nTFMPlus Library Example - 10SEP2021\r\n"); // say 'hello'
+    delay(20);                                             // Gib dem Port Zeit zur Initialisierung
+    printf_begin();                                        // Initialisiere printf.
+    printf("\r\nTFMPlus Library Example - 10SEP2021\r\n"); // Sage 'Hallo'
 
-    Serial2.begin(115200); // Initialize TFMPLus device serial port.
-    delay(20);             // Give port time to initalize
-    tfmP.begin(&Serial2);  // Initialize device library object and...
-                           // pass device serial port to the object.
+    Serial2.begin(115200); // Initialisiere die serielle Schnittstelle des TFMPlus Geräts.
+    delay(20);             // Gib dem Port Zeit zur Initialisierung
+    tfmP.begin(&Serial2);  // Initialisiere das Gerätebibliotheksobjekt und...
+                           // übergebe die serielle Schnittstelle des Geräts an das Objekt.
 
-    // Send some example commands to the TFMini-Plus
-    // - - Perform a system reset - - - - - - - - - - -
+    // Sende einige Beispielsbefehle an den TFMini-Plus
+    // - - Führe einen Systemreset durch - - - - - - - - - - -
     printf("Soft reset: ");
     if (tfmP.sendCommand(SOFT_RESET, 0))
     {
-        printf("passed.\r\n");
+        printf("erfolgreich.\r\n");
     }
     else
         tfmP.printReply();
 
-    delay(500); // added to allow the System Rest enough time to complete
+    delay(500); // Wartezeit, um dem Systemreset genügend Zeit zum Abschluss zu geben
 
-    // - - Display the firmware version - - - - - - - - -
-    printf("Firmware version: ");
+    // - - Zeige die Firmware-Version an - - - - - - - - -
+    printf("Firmware-Version: ");
     if (tfmP.sendCommand(GET_FIRMWARE_VERSION, 0))
     {
-        printf("%1u.", tfmP.version[0]); // print three single numbers
-        printf("%1u.", tfmP.version[1]); // each separated by a dot
+        printf("%1u.", tfmP.version[0]); // Gib drei einzelne Zahlen aus
+        printf("%1u.", tfmP.version[1]); // jeweils durch einen Punkt getrennt
         printf("%1u\r\n", tfmP.version[2]);
     }
     else
         tfmP.printReply();
-    // - - Set the data frame-rate to 20Hz - - - - - - - -
-    printf("Data-Frame rate: ");
+    // - - Setze die Daten-Framerate auf 20Hz - - - - - - - -
+    printf("Daten-Framerate: ");
     if (tfmP.sendCommand(SET_FRAME_RATE, FRAME_20))
     {
         printf("%2uHz.\r\n", FRAME_20);
     }
     else
         tfmP.printReply();
-    // - - - - - - - - - - - - - - - - - - - - - - - -
 
-    /*  // - - - - - - - - - - - - - - - - - - - - - - - -
-        // The next two commands may be used to switch the device
-        // into I2C mode.  This sketch will no longer receive UART
-        // (serial) data.  The 'TFMPI2C_example' sketch in the
-        // TFMPI2C Library can be used to switch the device back
-        // to UART mode.
-        // Don't forget to switch the cables, too.
-        // - - - - - - - - - - - - - - - - - - - - - - - -
-        printf( "Set I2C Mode: ");
-        if( tfmP.sendCommand( SET_I2C_MODE, 0))
-        {
-            printf( "mode set.\r\n");
-        }
-        else tfmP.printReply();
-        printf( "Save settings: ");
-        if( tfmP.sendCommand( SAVE_SETTINGS, 0))
-        {
-            printf( "saved.\r\n");
-        }
-        else tfmP.printReply();
-        // - - - - - - - - - - - - - - - - - - - - - - - -
-    */
-
-    delay(500); // And wait for half a second.
+    delay(500); // Wartezeit von einer halben Sekunde.
 }
 
-int16_t tfDist = 0;
+int16_t tfDist = 0; // Entfernungswert vom TFMPlus Sensor
 
 void changevolume(int prozent, bool quiet)
 {
     if (quiet)
     {
-        pinMode(quieterPort, OUTPUT);
-        pinMode(louderPort, INPUT);
+        pinMode(quieterPort, OUTPUT); // Setze den Pin für leiser als OUTPUT
+        pinMode(louderPort, INPUT);   // Setze den Pin für lauter als INPUT
     }
     else
     {
-        pinMode(louderPort, OUTPUT);
-        pinMode(quieterPort, INPUT);
+        pinMode(louderPort, OUTPUT); // Setze den Pin für lauter als OUTPUT
+        pinMode(quieterPort, INPUT); // Setze den Pin für leiser als INPUT
     }
-    delay(350); // Delay relativ
+    delay(350); // Pause von 350ms (relativ)
 
-    pinMode(louderPort, INPUT);
-    pinMode(quieterPort, INPUT);
+    pinMode(louderPort, INPUT);  // Setze den Pin für lauter zurück auf INPUT
+    pinMode(quieterPort, INPUT); // Setze den Pin für leiser zurück auf INPUT
 }
 
 void loop()
 {
-    tfmP.getData(tfDist); // Get distance in cm
-    int distance = tfDist;
+    tfmP.getData(tfDist);  // Lese Entfernungswert in cm vom TFMPlus Sensor
+    int distance = tfDist; // Speichere den Entfernungswert in einer lokalen Variable
 
     if (distance > maxDistance || distance < minDistance)
     {
-        distance = lastValidDistance; // Replace invalid distance with last valid distance
+        distance = lastValidDistance; // Ersetze ungültigen Entfernungswert mit dem letzten gültigen Entfernungswert
     }
     else
     {
-        lastValidDistance = distance; // Store the valid distance
+        lastValidDistance = distance; // Speichere den gültigen Entfernungswert als letzten gültigen Entfernungswert
     }
 
-    int volume = map(distance, minDistance, maxDistance, 0, 255); // Map distance to volume
-    volume = constrain(volume, 0, 255);                           // Limit volume to range of 0-255
+    int volume = map(distance, minDistance, maxDistance, 0, 255); // Mappe den Entfernungswert auf den Volumenwert
+    volume = constrain(volume, 0, 255);                           // Begrenze den Volumenwert auf den Bereich von 0-255
 
-    if (volume != lastVolume) // Volume has changed
+    if (volume != lastVolume) // Wenn sich das Volumen geändert hat
     {
         int diff = (lastVolume - volume);
         if (diff < 0)
             diff *= -1;
         if (volume > lastVolume)
         {
-            changevolume(diff, true);
+            changevolume(diff, true); // Wenn das Volumen erhöht wurde, rufe die Funktion changevolume mit "true" auf
         }
         else
         {
-            changevolume(diff, false);
+            changevolume(diff, false); // Wenn das Volumen verringert wurde, rufe die Funktion changevolume mit "false" auf
         }
-        lastVolume = volume; // Store the current volume
+        lastVolume = volume; // Speichere das aktuelle Volumen als letztes Volumen
     }
 
-    printf("Distance: %d cm : %d\n", distance, volume, tfDist);
+    printf("Entfernung: %d cm, Volumen: %d\n", distance, volume, tfDist);
 
-    /*printf("%d", distance);
-    printf(" cm, Volume: ");
-    printf("%d", volume);*/
-
-    delay(5); // Pause between measurements
+    delay(5); // Pause zwischen den Messungen
 }
